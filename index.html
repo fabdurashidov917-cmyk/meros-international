@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="uz" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meros International | Zamonaviy Tibbiyot Klinikasi Samarqand</title>
+  <meta name="description" content="Meros International tibbiyot markazi Samarqandda. Yuqori sifatli laboratoriya tahlillari, UTT (UZI), tajribali shifokorlar va qulay sharoitlar. Reyting: 5.0 (381 ta baho).">
+  
+  <!-- Favicon with H badge -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%230284c7'/><text x='50' y='67' font-size='50' font-family='sans-serif' font-weight='bold' fill='white' text-anchor='middle'>H</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              200: '#bae6fd',
+              300: '#7dd3fc',
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              800: '#075985',
+              900: '#0c4a6e',
+              emerald: '#0d9488'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            display: ['"Outfit"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Phosphor / Lucide Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-brand-500 selection:text-white relative overflow-x-hidden min-h-screen">
+
+  <!-- Floating "H" Particles Background Canvas (chapdan o'ngga harakatlanuvchi H belgili yumaloq sharchalar) -->
+  <canvas id="hParticlesCanvas" class="fixed inset-0 pointer-events-none z-10 opacity-75"></canvas>
+
+  <!-- TOP ANNOUNCEMENT BAR -->
+  <aside aria-label="Tezkor xabar" class="relative z-30 bg-gradient-to-r from-brand-900 via-brand-800 to-sky-900 text-white text-xs sm:text-sm py-2 px-4 shadow-sm border-b border-brand-700/40">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-3">
+        <!-- Live status indicator badge -->
+        <span id="headerClinicStatusBadge" class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          <span class="w-2 h-2 rounded-full bg-emerald-400 absolute"></span>
+          <span class="ml-2.5" id="headerStatusText">Hozir ochiq</span>
+        </span>
+        <span class="hidden md:inline text-slate-300">|</span>
+        <span class="hidden sm:inline text-slate-200">
+          <i class="fa-regular fa-clock mr-1 text-sky-300"></i> Ish vaqti: Dush-Shanba 07:00–22:00, Yak 08:30–17:00
+        </span>
+      </div>
+
+      <div class="flex items-center gap-4 text-xs">
+        <a href="https://yandex.uz/maps/org/meros_international/9656393325/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 text-amber-300 hover:text-amber-200 transition font-medium">
+          <span class="flex text-amber-400 text-xs">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </span>
+          <span class="font-bold text-white">5.0</span>
+          <span class="text-slate-300 hidden md:inline">(381 ta baho)</span>
+        </a>
+        <span class="text-slate-400 hidden lg:inline">|</span>
+        <a href="tel:+998557050808" class="font-bold text-sky-300 hover:text-white flex items-center gap-1.5 transition">
+          <i class="fa-solid fa-phone-volume text-xs text-emerald-400"></i>
+          <span>+998 55 705 08 08</span>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- NAVIGATION HEADER -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 transition-all duration-300 shadow-sm" id="mainHeader">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-3 group">
+          <div class="relative flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-600 via-brand-500 to-sky-400 text-white shadow-lg shadow-brand-500/25 group-hover:scale-105 transition-transform duration-300">
+            <span class="font-display font-extrabold text-2xl tracking-tight">H</span>
+            <div class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-emerald-500 border-2 border-white rounded-full"></div>
+          </div>
+          <div>
+            <div class="font-display font-black text-xl sm:text-2xl tracking-tight text-slate-900 group-hover:text-brand-600 transition">
+              MEROS <span class="text-brand-600 font-semibold text-lg sm:text-xl">INTERNATIONAL</span>
+            </div>
+            <div class="text-[11px] font-medium text-slate-500 tracking-wider uppercase -mt-1">
+              Zamonaviy Tibbiyot Markazi • Samarqand
+            </div>
+          </div>
+        </a>
+
+        <!-- Desktop Nav Links -->
+        <nav class="hidden lg:flex items-center gap-7 text-sm font-semibold text-slate-700">
+          <a href="#about" class="hover:text-brand-600 transition py-1">Klinika haqida</a>
+          <a href="#services" class="hover:text-brand-600 transition py-1">Xizmatlar & Narxlar</a>
+          <a href="#gallery" class="hover:text-brand-600 transition py-1">Fotogalereya (36)</a>
+          <a href="#reviews" class="hover:text-brand-600 transition py-1">Fikrlar (5.0 ★)</a>
+          <a href="#schedule" class="hover:text-brand-600 transition py-1">Jadval</a>
+          <a href="#contacts" class="hover:text-brand-600 transition py-1">Manzil & Aloqa</a>
+        </nav>
+
+        <!-- CTA Action Buttons -->
+        <div class="hidden sm:flex items-center gap-3">
+          <a href="tel:+998557050808" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 hover:border-brand-300 bg-slate-50 hover:bg-brand-50/50 text-slate-800 text-sm font-bold transition">
+            <i class="fa-solid fa-phone text-brand-600"></i>
+            <span>Qo‘ng‘iroq</span>
+          </a>
+          <button onclick="openBookingModal()" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-brand-600 to-sky-500 hover:from-brand-700 hover:to-sky-600 text-white text-sm font-bold shadow-md shadow-brand-500/25 hover:shadow-lg transition-all duration-300 transform active:scale-95">
+            <i class="fa-regular fa-calendar-check"></i>
+            <span>Qabulga yozilish</span>
+          </button>
+        </div>
+
+        <!-- Mobile Menu Toggle Button -->
+        <div class="flex items-center gap-2 lg:hidden">
+          <a href="tel:+998557050808" class="p-2.5 text-brand-600 bg-brand-50 rounded-xl hover:bg-brand-100 transition" aria-label="Qo'ng'iroq qilish">
+            <i class="fa-solid fa-phone"></i>
+          </a>
+          <button id="mobileMenuBtn" aria-label="Menyu" class="p-2.5 rounded-xl text-slate-700 hover:bg-slate-100 transition focus:outline-none">
+            <i class="fa-solid fa-bars text-xl" id="menuIcon"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobileMenu" class="hidden lg:hidden border-t border-slate-200/80 bg-white/95 backdrop-blur-xl px-4 pt-4 pb-6 shadow-xl transition-all duration-300">
+      <div class="flex flex-col gap-3 font-semibold text-slate-800 text-base">
+        <a href="#about" class="px-3 py-2 rounded-lg hover:bg-brand-50 hover:text-brand-600 transition" onclick="toggleMobileMenu()">Klinika haqida</a>
+        <a href="#services" class="px-3 py-2 rounded-lg hover:bg-brand-50 hover:text-brand-600 transition" onclick="toggleMobileMenu()">Xizmatlar va Narxlar</a>
+        <a href="#gallery" class="px-3 py-2 rounded-lg hover:bg-brand-50 hover:text-brand-600 transition" onclick="toggleMobileMenu()">Fotogalereya (36 ta rasm)</a>
+        <a href="#reviews" class="px-3 py-2 rounded-lg hover:bg-brand-50 hover:text-brand-600 transition" onclick="toggleMobileMenu()">Fikr-mulohazalar (5.0 ★)</a>
+        <a href="#schedule" class="px-3 py-2 rounded-lg hover:bg-brand-50 hover:text-brand-600 transition" onclick="toggleMobileMenu()">Ish jadvali</a>
+        <a href="#contacts" class="px-3 py-2 rounded-lg hover:bg-brand-50 hover:text-brand-600 transition" onclick="toggleMobileMenu()">Manzil & Kontaktlar</a>
+        
+        <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
+          <button onclick="openBookingModal(); toggleMobileMenu();" class="w-full py-3 bg-brand-600 text-white font-bold rounded-xl shadow-md text-center">
+            Qabulga yozilish
+          </button>
+          <a href="tel:+998557050808" class="w-full py-2.5 text-center font-bold text-brand-600 bg-brand-50 rounded-xl">
+            +998 55 705 08 08
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="relative pt-8 pb-16 sm:pt-12 sm:pb-24 lg:pt-16 lg:pb-28 overflow-hidden">
+      <!-- Background Ambient Glow -->
+      <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gradient-to-tr from-brand-300/30 via-sky-200/20 to-teal-200/30 rounded-full blur-3xl pointer-events-none -z-10"></div>
+      
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          
+          <!-- Left Column: Copy & Value Proposition -->
+          <div class="lg:col-span-7 space-y-6 sm:space-y-8 text-center lg:text-left">
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-brand-50 border border-brand-200/80 text-brand-700 text-xs sm:text-sm font-semibold shadow-sm">
+              <span class="flex h-2 w-2 rounded-full bg-brand-600"></span>
+              Samarqanddagi yuqori darajadagi xalqaro standartdagi klinika
+            </div>
+
+            <!-- Title -->
+            <h1 class="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
+              Sog‘lig‘ingiz — <span class="bg-gradient-to-r from-brand-600 via-sky-600 to-teal-500 bg-clip-text text-transparent">ishonchli qo‘llarda</span> va zamonaviy tibbiyot markazida
+            </h1>
+
+            <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+              <strong>Meros International</strong> — eng so‘nggi tibbiy texnologiyalar, aniq laboratoriya tahlillari va professional shifokorlar jamoasi bilan sog‘lig‘ingiz haqida har kuni g‘amxo‘rlik qiladi. Dam olish kunlarida ham xizmatingizdamiz!
+            </p>
+
+            <!-- Key Metric Highlights -->
+            <div class="grid grid-cols-3 gap-3 sm:gap-6 py-2 max-w-lg mx-auto lg:mx-0">
+              <div class="p-3 sm:p-4 rounded-2xl bg-white/80 backdrop-blur border border-slate-200 shadow-sm text-center">
+                <div class="flex items-center justify-center gap-1 text-amber-500 font-extrabold text-lg sm:text-2xl">
+                  <span>5.0</span>
+                  <i class="fa-solid fa-star text-sm"></i>
+                </div>
+                <div class="text-[11px] sm:text-xs font-medium text-slate-500 mt-1">381 ta baho</div>
+              </div>
+
+              <div class="p-3 sm:p-4 rounded-2xl bg-white/80 backdrop-blur border border-slate-200 shadow-sm text-center">
+                <div class="text-brand-600 font-extrabold text-lg sm:text-2xl">
+                  36+
+                </div>
+                <div class="text-[11px] sm:text-xs font-medium text-slate-500 mt-1">Real fotosuratlar</div>
+              </div>
+
+              <div class="p-3 sm:p-4 rounded-2xl bg-white/80 backdrop-blur border border-slate-200 shadow-sm text-center">
+                <div class="text-emerald-600 font-extrabold text-lg sm:text-2xl">
+                  7/7
+                </div>
+                <div class="text-[11px] sm:text-xs font-medium text-slate-500 mt-1">Hafta davomida</div>
+              </div>
+            </div>
+
+            <!-- CTA Actions -->
+            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 pt-2">
+              <button onclick="openBookingModal()" class="w-full sm:w-auto px-7 py-4 rounded-2xl bg-gradient-to-r from-brand-600 via-sky-600 to-teal-600 hover:from-brand-700 hover:to-teal-700 text-white font-bold text-base shadow-lg shadow-brand-500/30 hover:shadow-xl transition-all duration-300 transform active:scale-95 flex items-center justify-center gap-3">
+                <i class="fa-regular fa-calendar-check text-lg"></i>
+                <span>Qabulga navbat olish</span>
+              </button>
+
+              <a href="tel:+998557050808" class="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-bold text-base shadow-sm hover:shadow transition-all duration-300 flex items-center justify-center gap-3">
+                <i class="fa-solid fa-phone text-emerald-600"></i>
+                <span>+998 55 705 08 08</span>
+              </a>
+            </div>
+
+            <!-- Urgent / Featured note -->
+            <div class="inline-flex items-center gap-3 text-xs sm:text-sm text-slate-600 bg-sky-50/80 px-4 py-2.5 rounded-xl border border-sky-100">
+              <i class="fa-solid fa-vial-circle-check text-sky-600 text-base"></i>
+              <span><strong>Dam olish kunlarida ham:</strong> Umumiy qon tahlili (OAK) — <strong>50 000 so‘m</strong></span>
+            </div>
+          </div>
+
+          <!-- Right Column: Visual Hero Cards & Clinic Showcase -->
+          <div class="lg:col-span-5 relative">
+            <div class="relative mx-auto max-w-md lg:max-w-none">
+              <!-- Main Showcase Image Frame -->
+              <div class="relative rounded-3xl overflow-hidden shadow-2xl shadow-brand-900/15 border-4 border-white bg-slate-100 group">
+                <img src="images/XXXL.webp" alt="Meros International klinika binosi" class="w-full h-[360px] sm:h-[420px] object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
+
+                <!-- Overlay Info -->
+                <div class="absolute bottom-5 left-5 right-5 text-white">
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-brand-500/90 backdrop-blur">
+                      Meros International
+                    </span>
+                    <span class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/90">
+                      Ochiq klinika
+                    </span>
+                  </div>
+                  <h3 class="font-display font-bold text-lg text-white">Samarqand, Ali Qushchi koʻchasi, 62</h3>
+                  <p class="text-xs text-slate-200 mt-0.5">So‘g‘diyona-A mikrotumani • Yuqori texnologik xizmatlar</p>
+                </div>
+              </div>
+
+              <!-- Floating badge 1: Yandex Reviews -->
+              <a href="https://yandex.uz/maps/org/meros_international/9656393325/" target="_blank" rel="noopener noreferrer" class="absolute -bottom-6 -left-4 sm:-left-8 bg-white/95 backdrop-blur-md p-3.5 sm:p-4 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-3.5 hover:scale-105 transition duration-300">
+                <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-500 text-xl font-black">
+                  <i class="fa-solid fa-star"></i>
+                </div>
+                <div>
+                  <div class="text-sm font-extrabold text-slate-900 flex items-center gap-1.5">
+                    <span>5.0 Reyting</span>
+                    <span class="text-amber-500 text-xs">★★★★★</span>
+                  </div>
+                  <div class="text-xs text-slate-500">381 ta mustaqil baho</div>
+                </div>
+              </a>
+
+              <!-- Floating badge 2: Emergency / Fast help -->
+              <div class="absolute -top-4 -right-2 sm:-right-6 bg-white/95 backdrop-blur-md p-3 rounded-2xl shadow-lg border border-slate-100 flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-teal-500/10 text-teal-600 flex items-center justify-center text-lg">
+                  <i class="fa-solid fa-microscope"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-slate-900">Aniq diagnostika</div>
+                  <div class="text-[11px] text-slate-500">Ekspress laboratoriya</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE SCHEDULE & REAL-TIME STATUS BAR -->
+    <section id="schedule" class="py-10 bg-gradient-to-b from-white to-slate-50 border-y border-slate-200/70">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200/80">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <div class="lg:col-span-5 space-y-3">
+              <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-600">
+                <i class="fa-solid fa-calendar-day"></i> Ish tartibi va soatlari
+              </div>
+              <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-slate-900">
+                Qulay vaqtda tashrif buyuring
+              </h2>
+              <p class="text-sm text-slate-600">
+                Biz haftaning barcha kunlarida, erta tongdan kechki soatlargacha bemorlarimiz uchun qulay sharoitda faoliyat yuritamiz.
+              </p>
+
+              <!-- Real time status card -->
+              <div id="dynamicStatusCard" class="mt-4 p-4 rounded-2xl bg-brand-50/70 border border-brand-200/60 flex items-center justify-between">
+                <div>
+                  <div class="text-xs font-semibold text-slate-500">Hozirgi holat:</div>
+                  <div id="statusLiveText" class="text-base font-extrabold text-brand-700 flex items-center gap-2 mt-0.5">
+                    <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span>Klinika hozir ochiq</span>
+                  </div>
+                </div>
+                <a href="tel:+998557050808" class="px-3.5 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold transition shadow-sm">
+                  Qo‘ng‘iroq qilish
+                </a>
+              </div>
+            </div>
+
+            <!-- Schedule Timetable Table -->
+            <div class="lg:col-span-7">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                
+                <div class="schedule-row p-3.5 rounded-xl border border-slate-100 bg-slate-50/60 flex items-center justify-between" data-day="1">
+                  <span class="font-bold text-slate-700 flex items-center gap-2">
+                    <i class="fa-regular fa-calendar text-brand-600"></i> Dushanba
+                  </span>
+                  <span class="font-mono font-semibold text-slate-900 bg-white px-2.5 py-1 rounded-lg border border-slate-200 text-xs">07:00 – 22:00</span>
+                </div>
+
+                <div class="schedule-row p-3.5 rounded-xl border border-slate-100 bg-slate-50/60 flex items-center justify-between" data-day="2">
+                  <span class="font-bold text-slate-700 flex items-center gap-2">
+                    <i class="fa-regular fa-calendar text-brand-600"></i> Seshanba
+                  </span>
+                  <span class="font-mono font-semibold text-slate-900 bg-white px-2.5 py-1 rounded-lg border border-slate-200 text-xs">07:00 – 22:00</span>
+                </div>
+
+                <div class="schedule-row p-3.5 rounded-xl border border-slate-100 bg-slate-50/60 flex items-center justify-between" data-day="3">
+                  <span class="font-bold text-slate-700 flex items-center gap-2">
+                    <i class="fa-regular fa-calendar text-brand-600"></i> Chorshanba
+                  </span>
+                  <span class="font-mono font-semibold text-slate-900 bg-white px-2.5 py-1 rounded-lg border border-slate-200 text-xs">07:00 – 22:00</span>
+                </div>
+
+                <div class="schedule-row p-3.5 rounded-xl border border-slate-100 bg-slate-50/60 flex items-center justify-between" data-day="4">
+                  <span class="font-bold text-slate-700 flex items-center gap-2">
+                    <i class="fa-regular fa-calendar text-brand-600"></i> Payshanba
+                  </span>
+                  <span class="font-mono font-semibold text-slate-900 bg-white px-2.5 py-1 rounded-lg border border-slate-200 text-xs">07:00 – 22:00</span>
+                </div>
+
+                <div class="schedule-row p-3.5 rounded-xl border border-slate-100 bg-slate-50/60 flex items-center justify-between" data-day="5">
+                  <span class="font-bold text-slate-700 flex items-center gap-2">
+                    <i class="fa-regular fa-calendar text-brand-600"></i> Juma
+                  </span>
+                  <span class="font-mono font-semibold text-slate-900 bg-white px-2.5 py-1 rounded-lg border border-slate-200 text-xs">07:00 – 22:00</span>
+                </div>
+
+                <div class="schedule-row p-3.5 rounded-xl border border-slate-100 bg-slate-50/60 flex items-center justify-between" data-day="6">
+                  <span class="font-bold text-slate-700 flex items-center gap-2">
+                    <i class="fa-regular fa-calendar text-brand-600"></i> Shanba
+                  </span>
+                  <span class="font-mono font-semibold text-slate-900 bg-white px-2.5 py-1 rounded-lg border border-slate-200 text-xs">07:00 – 22:00</span>
+                </div>
+
+                <div class="schedule-row p-3.5 rounded-xl border border-amber-200/80 bg-amber-50/50 flex items-center justify-between sm:col-span-2" data-day="0">
+                  <span class="font-bold text-amber-900 flex items-center gap-2">
+                    <i class="fa-regular fa-sun text-amber-600"></i> Yakshanba (Dam olish kuni)
+                  </span>
+                  <span class="font-mono font-semibold text-amber-900 bg-white px-3 py-1 rounded-lg border border-amber-200 text-xs">08:30 – 17:00</span>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-16 sm:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <div class="lg:col-span-6 relative">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="space-y-4">
+                <img src="images/XXXL (1).webp" alt="Meros International qabulxona" class="w-full h-48 sm:h-64 object-cover rounded-2xl shadow-md border-2 border-white">
+                <img src="images/XXXL (7).webp" alt="Meros International klinika zali" class="w-full h-40 sm:h-52 object-cover rounded-2xl shadow-md border-2 border-white">
+              </div>
+              <div class="space-y-4 pt-6">
+                <img src="images/XXXL (12).webp" alt="Meros International diagnostika apparati" class="w-full h-40 sm:h-52 object-cover rounded-2xl shadow-md border-2 border-white">
+                <img src="images/XXXL (16).webp" alt="Meros International shifokor xonasi" class="w-full h-48 sm:h-64 object-cover rounded-2xl shadow-md border-2 border-white">
+              </div>
+            </div>
+
+            <!-- Floating Experience badge -->
+            <div class="absolute -bottom-5 right-10 bg-gradient-to-r from-brand-600 to-sky-600 text-white p-4 rounded-2xl shadow-xl flex items-center gap-3">
+              <i class="fa-solid fa-award text-3xl"></i>
+              <div>
+                <div class="text-xl font-black">5.0 Reyting</div>
+                <div class="text-xs text-sky-100 font-medium">Bemorlar e’tirofi</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-6 space-y-6">
+            <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-600 bg-brand-50 px-3 py-1 rounded-full">
+              <i class="fa-solid fa-hospital"></i> Meros International Haqida
+            </div>
+
+            <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+              Sifatli tibbiyot, zamonaviy uskunalar va bemorga mehr bilan yondashuv
+            </h2>
+
+            <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
+              Samarqand shahri, So‘g‘diyona-A mikrotumanida joylashgan <strong>«Meros International»</strong> ko‘p tarmoqli klinikasi eng ilg‘or diagnostik uskunalar, zamonaviy laboratoriya va tajribali mutaxassislar bilan xalqimiz salomatligini mustahkamlashga xizmat qiladi.
+            </p>
+
+            <div class="space-y-3.5 pt-2">
+              <div class="flex items-start gap-3">
+                <div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
+                  <i class="fa-solid fa-check text-xs"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-slate-900 text-sm">Tezkor va yuqori aniqlikdagi laboratoriya</h4>
+                  <p class="text-xs text-slate-500">Avtomatlashgan analizatorlarda eng kam xatolik va qisqa muddatda natija.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div class="w-7 h-7 rounded-lg bg-brand-100 text-brand-700 flex items-center justify-center shrink-0 mt-0.5">
+                  <i class="fa-solid fa-check text-xs"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-slate-900 text-sm">Dam olish kunlarida ham uzluksiz xizmat</h4>
+                  <p class="text-xs text-slate-500">Haftaning shanba va yakshanba kunlarida tahlillar topshirish imkoniyati.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div class="w-7 h-7 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center shrink-0 mt-0.5">
+                  <i class="fa-solid fa-check text-xs"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-slate-900 text-sm">Zamonaviy va qulay sharoitlar</h4>
+                  <p class="text-xs text-slate-500">Shinam kutish zallari, toza va steril xonalar hamda mehribon xodimlar.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-4 flex flex-wrap items-center gap-4">
+              <a href="https://yandex.uz/maps/org/meros_international/9656393325/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold transition shadow-sm">
+                <i class="fa-solid fa-map-location-dot text-amber-400"></i>
+                <span>Yandex xaritada ko‘rish</span>
+              </a>
+              <button onclick="openBookingModal()" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-brand-50 hover:bg-brand-100 text-brand-700 text-sm font-bold border border-brand-200 transition">
+                <i class="fa-regular fa-paper-plane"></i>
+                <span>Shifokorga yozilish</span>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES & PRICES SECTION (Tovarlar va xizmatlar) -->
+    <section id="services" class="py-16 sm:py-24 bg-slate-100/70 border-t border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+          <div>
+            <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-600 bg-brand-50 px-3 py-1 rounded-full border border-brand-200">
+              <i class="fa-solid fa-stethoscope"></i> Tovarlar va xizmatlar
+            </div>
+            <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2">
+              Klinika xizmatlari va laboratoriya tahlillari
+            </h2>
+            <p class="text-sm sm:text-base text-slate-600 max-w-xl mt-1">
+              Barcha asosiy tibbiy yo‘nalishlar va laboratoriya tekshiruvlari hamyonbop narxlarda.
+            </p>
+          </div>
+
+          <!-- Instant Search Box -->
+          <div class="w-full md:w-72">
+            <div class="relative">
+              <input type="text" id="serviceSearchInput" placeholder="Xizmat yoki tahlil qidirish..." class="w-full pl-10 pr-4 py-2.5 bg-white rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition shadow-sm">
+              <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Featured Service Banner (User request highlight: OAK weekend 50 000 so'm) -->
+        <div class="mb-10 bg-gradient-to-r from-brand-700 via-brand-600 to-sky-600 rounded-3xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden">
+          <div class="absolute -right-10 -bottom-10 w-60 h-60 bg-white/10 rounded-full blur-2xl"></div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center relative z-10">
+            <div class="md:col-span-8 space-y-2">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-xs font-bold tracking-wide uppercase">
+                <i class="fa-solid fa-clock"></i> Dam olish kunlari uchun maxsus qulaylik
+              </div>
+              <h3 class="text-2xl sm:text-3xl font-black font-display">Анализы по выходным: OAK (Umumiy qon tahlili)</h3>
+              <p class="text-sm text-sky-100 max-w-2xl leading-relaxed">
+                Dam olish kunlarida qon tahlilini topshiring — band grafikli bemorlar uchun juda qulay. Yuqori sifat, tezkor natija va qulay sharoitlarda!
+              </p>
+            </div>
+            <div class="md:col-span-4 flex flex-col sm:flex-row md:flex-col items-start md:items-end justify-center gap-3">
+              <div class="text-left md:text-right">
+                <div class="text-xs uppercase text-sky-200 font-bold">Narxi:</div>
+                <div class="text-3xl font-black text-amber-300 font-mono">50 000 сўм</div>
+                <div class="text-[11px] text-sky-100">1 ta tahlil uchun</div>
+              </div>
+              <button onclick="bookSpecificService('Umumiy qon tahlili (OAK) - 50 000 so\'m')" class="px-5 py-2.5 rounded-xl bg-white hover:bg-slate-100 text-brand-800 font-bold text-sm shadow-md transition active:scale-95">
+                Yozilish / Tahlil topshirish
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category Tabs -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-3 mb-6 no-scrollbar" id="serviceTabs">
+          <button class="service-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-brand-600 text-white shadow-sm transition shrink-0" data-category="all">
+            Barchasi
+          </button>
+          <button class="service-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white text-slate-700 hover:bg-slate-200 transition shrink-0" data-category="lab">
+            Laboratoriya & Tahlillar
+          </button>
+          <button class="service-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white text-slate-700 hover:bg-slate-200 transition shrink-0" data-category="uzi">
+            UTT (UZI) Diagnostika
+          </button>
+          <button class="service-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white text-slate-700 hover:bg-slate-200 transition shrink-0" data-category="consult">
+            Mutaxassislar ko‘rigi
+          </button>
+          <button class="service-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white text-slate-700 hover:bg-slate-200 transition shrink-0" data-category="proc">
+            Muolajalar & Stasionar
+          </button>
+        </div>
+
+        <!-- Services Grid -->
+        <div id="servicesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <!-- Dynamically populated or rendered static items with filter attributes -->
+          
+          <div class="service-card p-5 bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md transition group" data-category="lab" data-name="umumiy qon tahlili oak gemoglobin">
+            <div class="flex items-start justify-between gap-3">
+              <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center font-bold text-lg">
+                <i class="fa-solid fa-droplet"></i>
+              </div>
+              <span class="text-xs font-bold text-brand-600 bg-brand-50 px-2.5 py-1 rounded-lg font-mono">50 000 so‘m</span>
+            </div>
+            <h4 class="font-bold text-slate-900 text-base mt-3 group-hover:text-brand-600 transition">Umumiy qon tahlili (OAK)</h4>
+            <p class="text-xs text-slate-500 mt-1">Leykotsitlar, gemoglobin, eritrotsitlar va boshqa qon tarkibi ko‘rsatkichlarini to‘liq tahlil qilish.</p>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-[11px] text-slate-400"><i class="fa-regular fa-clock mr-1"></i> 1-2 soatda tayyor</span>
+              <button onclick="bookSpecificService('Umumiy qon tahlili (OAK)')" class="text-xs font-bold text-brand-600 hover:text-brand-700">Yozilish &rarr;</button>
+            </div>
+          </div>
+
+          <div class="service-card p-5 bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md transition group" data-category="lab" data-name="biokimyoviy qon tahlili jigar buyrak qand">
+            <div class="flex items-start justify-between gap-3">
+              <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-lg">
+                <i class="fa-solid fa-flask-vial"></i>
+              </div>
+              <span class="text-xs font-bold text-brand-600 bg-brand-50 px-2.5 py-1 rounded-lg font-mono">80 000 so‘m dan</span>
+            </div>
+            <h4 class="font-bold text-slate-900 text-base mt-3 group-hover:text-brand-600 transition">Biokimyoviy tahlillar</h4>
+            <p class="text-xs text-slate-500 mt-1">Jigar sinamalari (ALT, AST), buyrak (kreatinin, mochevina), glyukoza va xolesterin tekshiruvi.</p>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-[11px] text-slate-400"><i class="fa-regular fa-clock mr-1"></i> Shu kunning o‘zida</span>
+              <button onclick="bookSpecificService('Biokimyoviy tahlillar')" class="text-xs font-bold text-brand-600 hover:text-brand-700">Yozilish &rarr;</button>
+            </div>
+          </div>
+
+          <div class="service-card p-5 bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md transition group" data-category="lab" data-name="gormonlar tahlili qalqonsimon bez">
+            <div class="flex items-start justify-between gap-3">
+              <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center font-bold text-lg">
+                <i class="fa-solid fa-dna"></i>
+              </div>
+              <span class="text-xs font-bold text-brand-600 bg-brand-50 px-2.5 py-1 rounded-lg font-mono">90 000 so‘m dan</span>
+            </div>
+            <h4 class="font-bold text-slate-900 text-base mt-3 group-hover:text-brand-600 transition">Gormonlar va IFA tekshiruvi</h4>
+            <p class="text-xs text-slate-500 mt-1">Qalqonsimon bez gormonlari (TTG, T3, T4), reproduktiv gormonlar va vitaminlar tahlili.</p>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-[11px] text-slate-400"><i class="fa-regular fa-clock mr-1"></i> Aniq natija</span>
+              <button onclick="bookSpecificService('Gormonlar va IFA tekshiruvi')" class="text-xs font-bold text-brand-600 hover:text-brand-700">Yozilish &rarr;</button>
+            </div>
+          </div>
+
+          <div class="service-card p-5 bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md transition group" data-category="uzi" data-name="utt uzi qorin boshligi jigar taloq buyrak">
+            <div class="flex items-start justify-between gap-3">
+              <div class="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center font-bold text-lg">
+                <i class="fa-solid fa-wave-square"></i>
+              </div>
+              <span class="text-xs font-bold text-brand-600 bg-brand-50 px-2.5 py-1 rounded-lg font-mono">100 000 so‘m</span>
+            </div>
+            <h4 class="font-bold text-slate-900 text-base mt-3 group-hover:text-brand-600 transition">Qorin bo‘shlig‘i a’zolari UTT (UZI)</h4>
+            <p class="text-xs text-slate-500 mt-1">Jigar, o‘t qopi, me’da osti bezi va taloq holatini yuqori aniqlikdagi skanerdan o‘tkazish.</p>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-[11px] text-slate-400"><i class="fa-regular fa-clock mr-1"></i> 15 daqiqa</span>
+              <button onclick="bookSpecificService('Qorin bo‘shlig‘i UTT')" class="text-xs font-bold text-brand-600 hover:text-brand-700">Yozilish &rarr;</button>
+            </div>
+          </div>
+
+          <div class="service-card p-5 bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md transition group" data-category="uzi" data-name="utt uzi yurak exokardiografiya exo kardiologiya">
+            <div class="flex items-start justify-between gap-3">
+              <div class="w-10 h-10 rounded-xl bg-red-50 text-red-600 flex items-center justify-center font-bold text-lg">
+                <i class="fa-solid fa-heart-pulse"></i>
+              </div>
+              <span class="text-xs font-bold text-brand-600 bg-brand-50 px-2.5 py-1 rounded-lg font-mono">120 000 so‘m</span>
+            </div>
+            <h4 class="font-bold text-slate-900 text-base mt-3 group-hover:text-brand-600 transition">Yurak UTT (Exokardiografiya) + EKG</h4>
+            <p class="text-xs text-slate-500 mt-1">Yurak klapanlari, miokard qisqaruvchanligi va qon aylanishining to‘liq ultratovush tekshiruvi.</p>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-[11px] text-slate-400"><i class="fa-regular fa-clock mr-1"></i> Xulosa bilan</span>
+              <button onclick="bookSpecificService('Yurak UTT (ExoKG)')" class="text-xs font-bold text-brand-600 hover:text-brand-700">Yozilish &rarr;</button>
+            </div>
+          </div>
+
+          <div class="service-card p-5 bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md transition group" data-category="consult" data-name="terapevt shifokor korik maslahat">
+            <div class="flex items-start justify-between gap-3">
+              <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center font-bold text-lg">
+                <i class="fa-solid fa-user-doctor"></i>
+              </div>
+              <span class="text-xs font-bold text-brand-600 bg-brand-50 px-2.5 py-1 rounded-lg font-mono">70 000 so‘m</span>
+            </div>
+            <h4 class="font-bold text-slate-900 text-base mt-3 group-hover:text-brand-600 transition">Katta toifali Terapevt ko‘rigi</h4>
+            <p class="text-xs text-slate-500 mt-1">Birlamchi tibbiy ko‘rik, kasallik belgilarini aniqlash va individual davolash rejasini tuzish.</p>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-[11px] text-slate-400"><i class="fa-regular fa-user mr-1"></i> Tajribali shifokor</span>
+              <button onclick="bookSpecificService('Terapevt ko‘rigi')" class="text-xs font-bold text-brand-600 hover:text-brand-700">Yozilish &rarr;</button>
+            </div>
+          </div>
+
+          <div class="service-card p-5 bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md transition group" data-category="consult" data-name="nevrolog nevropatolog bosh ogriq umurtqa">
+            <div class="flex items-start justify-between gap-3">
+              <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-lg">
+                <i class="fa-solid fa-brain"></i>
+              </div>
+              <span class="text-xs font-bold text-brand-600 bg-brand-50 px-2.5 py-1 rounded-lg font-mono">80 000 so‘m</span>
+            </div>
+            <h4 class="font-bold text-slate-900 text-base mt-3 group-hover:text-brand-600 transition">Nevropatolog konsultatsiyasi</h4>
+            <p class="text-xs text-slate-500 mt-1">Bosh og‘riqlari, asab buzilishlari, umurtqa churralari va osteoxondrozni davolash.</p>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-[11px] text-slate-400"><i class="fa-regular fa-user mr-1"></i> Mutaxassis</span>
+              <button onclick="bookSpecificService('Nevropatolog konsultatsiyasi')" class="text-xs font-bold text-brand-600 hover:text-brand-700">Yozilish &rarr;</button>
+            </div>
+          </div>
+
+          <div class="service-card p-5 bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md transition group" data-category="proc" data-name="muolaja ukol tomir orqali kapelnitsa stasionar">
+            <div class="flex items-start justify-between gap-3">
+              <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-lg">
+                <i class="fa-solid fa-syringe"></i>
+              </div>
+              <span class="text-xs font-bold text-brand-600 bg-brand-50 px-2.5 py-1 rounded-lg font-mono">20 000 so‘m dan</span>
+            </div>
+            <h4 class="font-bold text-slate-900 text-base mt-3 group-hover:text-brand-600 transition">Muolaja xonasi & Kapelnitsalar</h4>
+            <p class="text-xs text-slate-500 mt-1">Tomir ichiga va mushak orasiga dori yuborish, qulay kunduzgi stasionar sharoitida muolajalar.</p>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-[11px] text-slate-400"><i class="fa-solid fa-shield-heart mr-1"></i> Steril & Xavfsiz</span>
+              <button onclick="bookSpecificService('Muolaja xonasi xizmatlari')" class="text-xs font-bold text-brand-600 hover:text-brand-700">Yozilish &rarr;</button>
+            </div>
+          </div>
+
+          <div class="service-card p-5 bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md transition group" data-category="consult" data-name="pediatr bolalar shifokori emlash">
+            <div class="flex items-start justify-between gap-3">
+              <div class="w-10 h-10 rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center font-bold text-lg">
+                <i class="fa-solid fa-baby"></i>
+              </div>
+              <span class="text-xs font-bold text-brand-600 bg-brand-50 px-2.5 py-1 rounded-lg font-mono">70 000 so‘m</span>
+            </div>
+            <h4 class="font-bold text-slate-900 text-base mt-3 group-hover:text-brand-600 transition">Pediatr (Bolalar shifokori)</h4>
+            <p class="text-xs text-slate-500 mt-1">Kichkintoylar salomatligini kuzatish, profilaktik ko‘rik va ehtiyotkor davolash choralarini belgilash.</p>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-[11px] text-slate-400"><i class="fa-regular fa-smile mr-1"></i> Mehribon munosabat</span>
+              <button onclick="bookSpecificService('Pediatr ko‘rigi')" class="text-xs font-bold text-brand-600 hover:text-brand-700">Yozilish &rarr;</button>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="mt-10 text-center">
+          <p class="text-xs text-slate-500 mb-3">* To‘liq narxlar va maxsus analizlar ro‘yxati bo‘yicha batafsil ma’lumot olish uchun ma’muriyat bilan bog‘laning.</p>
+          <a href="tel:+998557050808" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white border border-slate-300 hover:border-brand-500 text-slate-800 text-sm font-bold shadow-sm transition">
+            <i class="fa-solid fa-phone text-brand-600"></i>
+            <span>Barcha tahlillar narxini bilish: +998 55 705 08 08</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PHOTO GALLERY SECTION (36 ta haqiqiy fotosurat) -->
+    <section id="gallery" class="py-16 sm:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+          <div>
+            <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-600 bg-brand-50 px-3 py-1 rounded-full border border-brand-200">
+              <i class="fa-regular fa-images"></i> Fotogalereya (36 ta rasm)
+            </div>
+            <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2">
+              Klinikamiz muhiti bilan tanishing
+            </h2>
+            <p class="text-sm sm:text-base text-slate-600 max-w-xl mt-1">
+              Zamonaviy shifokor xonalari, diagnostika uskunalari, qulay qabulxona va shinam palatalar fotosuratlari.
+            </p>
+          </div>
+
+          <div class="flex items-center gap-2 text-xs font-semibold text-slate-500">
+            <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+            <span>Kattalashtirib ko‘rish uchun rasmni bosing</span>
+          </div>
+        </div>
+
+        <!-- Filter tabs for gallery -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-3 mb-6 no-scrollbar" id="galleryTabs">
+          <button class="gallery-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-brand-600 text-white shadow-sm transition shrink-0" data-filter="all">
+            Barchasi (36)
+          </button>
+          <button class="gallery-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition shrink-0" data-filter="exterior">
+            Bino & Qabulxona
+          </button>
+          <button class="gallery-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition shrink-0" data-filter="equipment">
+            Uskunalar & Diagnostika
+          </button>
+          <button class="gallery-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition shrink-0" data-filter="rooms">
+            Xonalar & Palatalar
+          </button>
+        </div>
+
+        <!-- Responsive Image Grid -->
+        <div id="galleryContainer" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+          <!-- Images will be generated or rendered cleanly with lazy loading -->
+        </div>
+
+        <!-- Gallery Load More / View All Button -->
+        <div class="mt-8 text-center" id="galleryMoreWrapper">
+          <button id="showAllPhotosBtn" class="px-7 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm shadow-md transition-all">
+            Barcha 36 ta fotosuratni ko‘rish
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- REVIEWS & RATINGS SECTION (Reyting 5.0, 381 ta baho, 119 ta fikr-mulohaza) -->
+    <section id="reviews" class="py-16 sm:py-24 bg-gradient-to-b from-slate-50 to-white border-t border-slate-200/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center mb-12">
+          
+          <div class="lg:col-span-5 space-y-4">
+            <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">
+              <i class="fa-solid fa-star"></i> Bemorlar fikrlari
+            </div>
+            <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-slate-900">
+              5.0 Reyting va 381 ta haqiqiy baho
+            </h2>
+            <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
+              Biz uchun eng oliy qadriyat — bu har bir bemorning sog‘ayishi va samimiy minnatdorchiligi. Yandex Xarita va boshqa tizimlarda qoldirilgan 119 dan ortiq batafsil fikrlar buning isbotidir.
+            </p>
+
+            <div class="pt-2 flex flex-wrap gap-3">
+              <a href="https://yandex.uz/maps/org/meros_international/9656393325/reviews/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-sm shadow-md shadow-amber-500/20 transition">
+                <i class="fa-solid fa-comments"></i>
+                <span>Yandexda sharh qoldirish</span>
+              </a>
+              <a href="https://yandex.uz/maps/org/meros_international/9656393325/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white border border-slate-300 hover:border-slate-400 text-slate-800 font-bold text-sm transition">
+                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-500"></i>
+                <span>Yandex xaritada tekshirish</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Rating Breakdown Scorecard -->
+          <div class="lg:col-span-7">
+            <div class="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200 shadow-lg shadow-slate-100">
+              <div class="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center">
+                
+                <div class="sm:col-span-5 text-center sm:text-left border-b sm:border-b-0 sm:border-r border-slate-100 pb-5 sm:pb-0 sm:pr-6">
+                  <div class="font-display text-6xl font-black text-slate-900 tracking-tight">5.0</div>
+                  <div class="flex items-center justify-center sm:justify-start gap-1 text-amber-400 text-lg my-1">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                  <div class="text-xs font-bold text-slate-700">381 ta baho asosida</div>
+                  <div class="text-[11px] text-slate-400 mt-0.5">119 ta matnli fikr-mulohaza</div>
+                </div>
+
+                <div class="sm:col-span-7 space-y-2 text-xs">
+                  <div class="flex items-center gap-2">
+                    <span class="w-12 font-medium text-slate-600">5 yulduz</span>
+                    <div class="flex-1 h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                      <div class="h-full bg-amber-400 rounded-full" style="width: 98%"></div>
+                    </div>
+                    <span class="font-bold text-slate-700">98%</span>
+                  </div>
+
+                  <div class="flex items-center gap-2">
+                    <span class="w-12 font-medium text-slate-600">4 yulduz</span>
+                    <div class="flex-1 h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                      <div class="h-full bg-amber-400 rounded-full" style="width: 2%"></div>
+                    </div>
+                    <span class="font-bold text-slate-700">2%</span>
+                  </div>
+
+                  <div class="flex items-center gap-2">
+                    <span class="w-12 font-medium text-slate-600">3 yulduz</span>
+                    <div class="flex-1 h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                      <div class="h-full bg-slate-200 rounded-full" style="width: 0%"></div>
+                    </div>
+                    <span class="font-bold text-slate-700">0%</span>
+                  </div>
+
+                  <div class="flex items-center gap-2">
+                    <span class="w-12 font-medium text-slate-600">2 yulduz</span>
+                    <div class="flex-1 h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                      <div class="h-full bg-slate-200 rounded-full" style="width: 0%"></div>
+                    </div>
+                    <span class="font-bold text-slate-700">0%</span>
+                  </div>
+
+                  <div class="flex items-center gap-2">
+                    <span class="w-12 font-medium text-slate-600">1 yulduz</span>
+                    <div class="flex-1 h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                      <div class="h-full bg-slate-200 rounded-full" style="width: 0%"></div>
+                    </div>
+                    <span class="font-bold text-slate-700">0%</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Real Testimonials Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex text-amber-400 text-xs gap-0.5">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <span class="text-[11px] text-slate-400 font-mono">Yandex Xarita</span>
+              </div>
+              <p class="text-sm text-slate-700 italic">
+                «Juda zamonaviy klinika, xodimlar muloyim va xushmuomala. Shanba kuni shoshilinch qon tahlili topshirish kerak bo‘lib kelgandik, tez va sifatli qilib berishdi. Rahmat!»
+              </p>
+            </div>
+            <div class="mt-4 pt-4 border-t border-slate-100 flex items-center gap-3">
+              <div class="w-9 h-9 rounded-full bg-brand-100 text-brand-700 font-bold flex items-center justify-center text-sm">
+                F
+              </div>
+              <div>
+                <div class="font-bold text-slate-900 text-xs">Farrux Saidov</div>
+                <div class="text-[11px] text-slate-400">Tashrif buyuruvchi</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex text-amber-400 text-xs gap-0.5">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <span class="text-[11px] text-slate-400 font-mono">Yandex Xarita</span>
+              </div>
+              <p class="text-sm text-slate-700 italic">
+                «Samarqandda bunday pokiza va yangi apparatlar bilan jihozlangan klinika borligidan xursandmiz. UTT mutaxassisi juda batafsil tushuntirib berdi. 5 baho!»
+              </p>
+            </div>
+            <div class="mt-4 pt-4 border-t border-slate-100 flex items-center gap-3">
+              <div class="w-9 h-9 rounded-full bg-teal-100 text-teal-700 font-bold flex items-center justify-center text-sm">
+                N
+              </div>
+              <div>
+                <div class="font-bold text-slate-900 text-xs">Nodira Karimova</div>
+                <div class="text-[11px] text-slate-400">Doimiy mijoz</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex text-amber-400 text-xs gap-0.5">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <span class="text-[11px] text-slate-400 font-mono">Yandex Xarita</span>
+              </div>
+              <p class="text-sm text-slate-700 italic">
+                «Narxlar hamyonbop va sifat juda yuqori. Navbatda ko‘p kuttirishmadi, qabulxonadagi qizlar juda tez ishlashadi. Barchaga tavsiya qilaman.»
+              </p>
+            </div>
+            <div class="mt-4 pt-4 border-t border-slate-100 flex items-center gap-3">
+              <div class="w-9 h-9 rounded-full bg-sky-100 text-sky-700 font-bold flex items-center justify-center text-sm">
+                J
+              </div>
+              <div>
+                <div class="font-bold text-slate-900 text-xs">Jasur Rahmatov</div>
+                <div class="text-[11px] text-slate-400">Bemor</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CONTACT, LOCATION & INTERACTIVE MAP SECTION -->
+    <section id="contacts" class="py-16 sm:py-24 bg-white border-t border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-600 bg-brand-50 px-3 py-1 rounded-full border border-brand-200">
+            <i class="fa-solid fa-location-dot"></i> Bizning manzil va aloqa
+          </div>
+          <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2">
+            Meros International ga tashrif buyuring
+          </h2>
+          <p class="text-sm sm:text-base text-slate-600 mt-1">
+            Samarqand shahri, So‘g‘diyona-A mikrotumani, Ali Qushchi koʻchasi, 62-uy.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+          
+          <!-- Contact Cards Column -->
+          <div class="lg:col-span-5 space-y-4 flex flex-col justify-between">
+            
+            <div class="p-6 rounded-3xl bg-slate-50 border border-slate-200/80 shadow-sm space-y-4">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-2xl bg-brand-600 text-white flex items-center justify-center text-xl shrink-0 shadow-md shadow-brand-500/20">
+                  <i class="fa-solid fa-phone"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Telefon raqamimiz:</div>
+                  <a href="tel:+998557050808" class="text-xl sm:text-2xl font-black text-slate-900 hover:text-brand-600 transition block mt-0.5">
+                    +998 55 705 08 08
+                  </a>
+                  <p class="text-xs text-slate-500 mt-0.5">Operatorlarimiz qo‘ng‘irog‘ingizga javob berishga tayyor</p>
+                </div>
+              </div>
+
+              <div class="pt-4 border-t border-slate-200/80 flex items-start gap-4">
+                <div class="w-12 h-12 rounded-2xl bg-sky-500 text-white flex items-center justify-center text-xl shrink-0 shadow-md shadow-sky-500/20">
+                  <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Klinika manzili:</div>
+                  <div class="text-base font-bold text-slate-900 mt-0.5">
+                    Samarqand, So‘g‘diyona-A mikrotumani, Ali Qushchi koʻchasi, 62
+                  </div>
+                  <p class="text-xs text-slate-500 mt-0.5">Mo‘ljal: So‘g‘diyona massivi</p>
+                </div>
+              </div>
+
+              <div class="pt-4 border-t border-slate-200/80 flex items-start gap-4">
+                <div class="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center text-xl shrink-0 shadow-md shadow-emerald-500/20">
+                  <i class="fa-regular fa-clock"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Ish vaqti tartibi:</div>
+                  <div class="text-sm font-bold text-slate-900 mt-0.5">
+                    Dush–Shanba: 07:00 – 22:00
+                  </div>
+                  <div class="text-sm font-semibold text-amber-700">
+                    Yakshanba: 08:30 – 17:00
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action buttons for navigation -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <a href="https://yandex.uz/maps/org/meros_international/9656393325/" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-900 font-bold text-sm flex items-center justify-center gap-2 transition shadow-sm text-center">
+                <i class="fa-solid fa-diamond-turn-right text-amber-600 text-lg"></i>
+                <span>Yandex Marshrut</span>
+              </a>
+
+              <a href="https://t.me/meros_international" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl bg-sky-50 hover:bg-sky-100 border border-sky-200 text-sky-900 font-bold text-sm flex items-center justify-center gap-2 transition shadow-sm text-center">
+                <i class="fa-brands fa-telegram text-sky-600 text-lg"></i>
+                <span>Telegram orqali yozish</span>
+              </a>
+            </div>
+
+          </div>
+
+          <!-- Map Column -->
+          <div class="lg:col-span-7">
+            <div class="rounded-3xl overflow-hidden border border-slate-200 shadow-lg h-[360px] sm:h-full min-h-[360px] relative bg-slate-100">
+              <!-- Yandex Map Iframe Embed -->
+              <iframe 
+                src="https://yandex.uz/map-widget/v1/org/meros_international/9656393325/?ll=66.95%2C39.65&z=15" 
+                width="100%" 
+                height="100%" 
+                frameborder="0" 
+                allowfullscreen="true" 
+                class="w-full h-full border-0"
+                title="Meros International xaritada">
+              </iframe>
+
+              <!-- Floating overlay to open in app -->
+              <div class="absolute bottom-4 left-4 right-4 sm:right-auto bg-white/95 backdrop-blur-md p-3 rounded-2xl shadow-lg border border-slate-200 flex items-center justify-between gap-3 text-xs">
+                <div>
+                  <div class="font-bold text-slate-900">Meros International</div>
+                  <div class="text-[11px] text-slate-500">Ali Qushchi koʻchasi, 62</div>
+                </div>
+                <a href="https://yandex.uz/maps/org/meros_international/9656393325/" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-xl bg-brand-600 text-white font-bold hover:bg-brand-700 transition">
+                  Xaritada ochish &rarr;
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="py-14 bg-slate-50 border-t border-slate-200">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6">
+        <h3 class="font-display text-2xl sm:text-3xl font-extrabold text-slate-900 text-center mb-8">
+          Ko‘p so‘raladigan savollar
+        </h3>
+
+        <div class="space-y-3" id="faqAccordion">
+          <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+            <button class="w-full p-4 sm:p-5 text-left font-bold text-slate-800 flex items-center justify-between gap-4 focus:outline-none" onclick="toggleFaq(this)">
+              <span>Shanba va yakshanba kunlari tahlil topshirsa bo‘ladimi?</span>
+              <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-200"></i>
+            </button>
+            <div class="px-5 pb-5 text-sm text-slate-600 hidden">
+              Ha, albatta! Dam olish kunlarida ham laboratoriyamiz ishlaydi. Masalan, umumiy qon tahlili (OAK) 50 000 so‘m bo‘lib, shanba va yakshanba kunlari bemalol topshirishingiz mumkin.
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+            <button class="w-full p-4 sm:p-5 text-left font-bold text-slate-800 flex items-center justify-between gap-4 focus:outline-none" onclick="toggleFaq(this)">
+              <span>Shifokor qabuliga oldindan yozilish shartmi?</span>
+              <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-200"></i>
+            </button>
+            <div class="px-5 pb-5 text-sm text-slate-600 hidden">
+              Oldindan yozilish navbat kutmasdan, aynan belgilangan vaqtda qabulga kirishingizga yordam beradi. Sayt orqali yoki +998 55 705 08 08 raqamiga qo‘ng‘iroq qilib yozilishingiz mumkin.
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+            <button class="w-full p-4 sm:p-5 text-left font-bold text-slate-800 flex items-center justify-between gap-4 focus:outline-none" onclick="toggleFaq(this)">
+              <span>Tahlil natijalari qancha vaqtda tayyor bo‘ladi?</span>
+              <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-200"></i>
+            </button>
+            <div class="px-5 pb-5 text-sm text-slate-600 hidden">
+              Aksariyat umumiy va biokimyoviy tahlillar o‘sha kunning o‘zida, 1-3 soat ichida tayyor bo‘ladi. Natijalarni qog‘oz ko‘rinishida yoki Telegram orqali olishingiz mumkin.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-900 text-slate-300 pt-16 pb-24 sm:pb-12 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pb-12 border-b border-slate-800">
+        
+        <!-- Col 1 -->
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-brand-600 text-white font-display font-extrabold text-xl">
+              H
+            </div>
+            <span class="font-display font-extrabold text-xl text-white">MEROS <span class="text-brand-400 font-semibold text-base">INTERNATIONAL</span></span>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Samarqanddagi zamonaviy ko‘p tarmoqli tibbiyot markazi. Aniq laboratoriya tahlillari, UTT va malakali shifokorlar xizmati.
+          </p>
+          <div class="flex items-center gap-2 text-amber-400 text-sm">
+            <i class="fa-solid fa-star"></i>
+            <span class="font-bold text-white">5.0</span>
+            <span class="text-slate-400 text-xs">(381 ta baho)</span>
+          </div>
+        </div>
+
+        <!-- Col 2: Navigation Links -->
+        <div class="space-y-3">
+          <h4 class="font-bold text-white text-sm uppercase tracking-wider">Bo‘limlar</h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#about" class="hover:text-brand-400 transition">Klinika haqida</a></li>
+            <li><a href="#services" class="hover:text-brand-400 transition">Xizmatlar va narxlar</a></li>
+            <li><a href="#gallery" class="hover:text-brand-400 transition">36 ta fotosurat galereyasi</a></li>
+            <li><a href="#reviews" class="hover:text-brand-400 transition">Mijozlar fikrlari</a></li>
+            <li><a href="#schedule" class="hover:text-brand-400 transition">Ish jadvali</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Services -->
+        <div class="space-y-3">
+          <h4 class="font-bold text-white text-sm uppercase tracking-wider">Xizmatlar</h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#services" class="hover:text-brand-400 transition">Umumiy qon tahlili (OAK) — 50 000 so‘m</a></li>
+            <li><a href="#services" class="hover:text-brand-400 transition">Biokimyo & IFA tahlillari</a></li>
+            <li><a href="#services" class="hover:text-brand-400 transition">UTT (UZI) diagnostika</a></li>
+            <li><a href="#services" class="hover:text-brand-400 transition">Terapevt & Kardiolog</a></li>
+            <li><a href="#services" class="hover:text-brand-400 transition">Nevropatolog & Pediatr</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Contacts -->
+        <div class="space-y-3">
+          <h4 class="font-bold text-white text-sm uppercase tracking-wider">Aloqa ma’lumotlari</h4>
+          <div class="space-y-2 text-xs">
+            <p class="flex items-center gap-2">
+              <i class="fa-solid fa-phone text-brand-400"></i>
+              <a href="tel:+998557050808" class="font-bold text-white hover:text-brand-300">+998 55 705 08 08</a>
+            </p>
+            <p class="flex items-start gap-2">
+              <i class="fa-solid fa-location-dot text-brand-400 mt-1"></i>
+              <span>Samarqand, So‘g‘diyona-A mikrotumani, Ali Qushchi koʻchasi, 62</span>
+            </p>
+            <p class="flex items-center gap-2">
+              <i class="fa-regular fa-clock text-brand-400"></i>
+              <span>Dush-Shan: 07:00–22:00 | Yak: 08:30–17:00</span>
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+        <p>&copy; 2026 «Meros International» tibbiyot klinikasi. Barcha huquqlar himoyalangan.</p>
+        <div class="flex items-center gap-4">
+          <a href="https://yandex.uz/maps/org/meros_international/9656393325/" target="_blank" rel="noopener noreferrer" class="hover:text-slate-400">Yandex Xarita profili</a>
+          <span>•</span>
+          <a href="#mainHeader" class="hover:text-slate-400">Yuqoriga qaytish &uarr;</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MOBILE STICKY BOTTOM QUICK ACTION BAR -->
+  <aside aria-label="Tezkor tugmalar" class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-lg border-t border-slate-200/90 py-2.5 px-4 sm:hidden flex items-center justify-around shadow-2xl">
+    <a href="tel:+998557050808" class="flex flex-col items-center gap-1 text-slate-700 hover:text-brand-600">
+      <div class="w-9 h-9 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-sm shadow-sm">
+        <i class="fa-solid fa-phone"></i>
+      </div>
+      <span class="text-[10px] font-bold">Qo‘ng‘iroq</span>
+    </a>
+
+    <button onclick="openBookingModal()" class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-600 text-white font-bold text-xs shadow-md shadow-brand-500/30">
+      <i class="fa-regular fa-calendar-check"></i>
+      <span>Navbat olish</span>
+    </button>
+
+    <a href="https://yandex.uz/maps/org/meros_international/9656393325/" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center gap-1 text-slate-700 hover:text-brand-600">
+      <div class="w-9 h-9 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center text-sm shadow-sm">
+        <i class="fa-solid fa-map-location-dot"></i>
+      </div>
+      <span class="text-[10px] font-bold">Xarita</span>
+    </a>
+  </aside>
+
+  <!-- LIGHTBOX MODAL FOR 36 PHOTOS -->
+  <div id="galleryLightbox" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <button onclick="closeLightbox()" aria-label="Yopish" class="absolute top-5 right-5 text-white/80 hover:text-white text-2xl p-2 rounded-full hover:bg-white/10 transition z-50">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    
+    <button onclick="prevLightboxImage()" aria-label="Oldingi rasm" class="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white text-2xl p-3 rounded-full hover:bg-white/10 transition z-50">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+    
+    <button onclick="nextLightboxImage()" aria-label="Keyingi rasm" class="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white text-2xl p-3 rounded-full hover:bg-white/10 transition z-50">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+
+    <div class="max-w-5xl max-h-[85vh] flex flex-col items-center">
+      <img id="lightboxImage" src="" alt="Meros International galereya" class="max-w-full max-h-[80vh] object-contain rounded-xl shadow-2xl">
+      <div class="mt-3 text-white/90 text-sm font-medium flex items-center gap-3">
+        <span id="lightboxIndex">1 / 36</span>
+        <span>•</span>
+        <span id="lightboxCaption">Meros International</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOOKING / CALL REQUEST MODAL -->
+  <div id="bookingModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative border border-slate-100 transform transition-all duration-300">
+      <button onclick="closeBookingModal()" aria-label="Yopish" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 text-xl p-1.5 rounded-xl hover:bg-slate-100 transition">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-5">
+        <div class="w-12 h-12 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center text-xl">
+          <i class="fa-regular fa-calendar-check"></i>
+        </div>
+        <div>
+          <h3 class="font-display font-extrabold text-xl text-slate-900">Qabulga yozilish</h3>
+          <p class="text-xs text-slate-500">Meros International klinikasi shifokori qabuli</p>
+        </div>
+      </div>
+
+      <form id="bookingForm" onsubmit="handleBookingSubmit(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5" for="patientName">F.I.SH (Ismingiz):</label>
+          <input type="text" id="patientName" required placeholder="Masalan: Azizbek Aliyev" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5" for="patientPhone">Telefon raqamingiz:</label>
+          <input type="tel" id="patientPhone" required placeholder="+998 90 123 45 67" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5" for="bookingService">Kerakli xizmat yoki mutaxassis:</label>
+          <select id="bookingService" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition">
+            <option value="Umumiy qon tahlili (OAK) - 50 000 so'm">Umumiy qon tahlili (OAK) - 50 000 so'm</option>
+            <option value="Laboratoriya tahlillari">Laboratoriya tahlillari (Biokimyo, Gormonlar)</option>
+            <option value="UTT (UZI) diagnostika">UTT (UZI) diagnostika</option>
+            <option value="Terapevt ko'rigi">Terapevt ko‘rigi</option>
+            <option value="Kardiolog konsultatsiyasi">Kardiolog konsultatsiyasi (EKG)</option>
+            <option value="Nevropatolog ko'rigi">Nevropatolog ko‘rigi</option>
+            <option value="Pediatr (Bolalar shifokori)">Pediatr (Bolalar shifokori)</option>
+            <option value="Muolaja xonasi & Stasionar">Muolaja xonasi & Stasionar</option>
+            <option value="Boshqa xizmat">Boshqa xizmat / Maslahat</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5" for="bookingDate">Qulay vaqt / Izoh (ixtiyoriy):</label>
+          <input type="text" id="bookingDate" placeholder="Masalan: Ertaga soat 10:00 da" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition">
+        </div>
+
+        <button type="submit" class="w-full py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-lg shadow-brand-500/25 transition-all">
+          Yuborish va qabulga yozilish
+        </button>
+      </form>
+
+      <div id="bookingSuccessNotice" class="hidden mt-4 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm text-center">
+        <i class="fa-solid fa-circle-check text-emerald-600 text-lg mb-1 block"></i>
+        <strong>Arizangiz qabul qilindi!</strong><br>
+        Tez orada xodimlarimiz siz bilan bog‘lanishadi.
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript files -->
+  <script src="js/particles.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
